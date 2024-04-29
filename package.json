@@ -1,7 +1,7 @@
 {
   "homepage": "https://VJ19.github.io/FITR_Web/",
   "name": "fitr-web",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
