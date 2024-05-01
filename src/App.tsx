@@ -29,6 +29,10 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <h1>HAHHA GENESIS</h1>
+      <h1>HAHHA kenma</h1>
+      <h1>HAHHA bry</h1>
+      <h1>HAHHA vench</h1>
     </>
   );
 }
