@@ -1,15 +1,20 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import Home from "./pages/Home";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import LoginPage from "./pages/auth/login/LoginPage";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  console.log(count);
   return (
     <>
-      <div>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route element={<Home />} path="/" exact />
+        </Route>
+      </Routes>
+
+      {/* <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -19,20 +24,14 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <button onClick={() => dispatch(increment())}>count is {value}</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
-      <h1>HAHHA GENESIS</h1>
-      <h1>HAHHA kenma</h1>
-      <h1>HAHHA bry</h1>
-      <h1>HAHHA vench</h1>
+  </p>*/}
     </>
   );
 }
