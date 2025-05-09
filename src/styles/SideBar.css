@@ -1,0 +1,57 @@
+/* Sidebar (SideNav) Styling */
+.sideNav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: auto;
+  width: 250px;
+  background-color: #333333;
+  margin-bottom: -100%;
+  box-shadow: 5px 3px 24px rgba(0, 0, 0, 0.75);
+  z-index: 1;
+  transition: transform 0.3s ease-in-out; /* Smooth drawer effect */
+}
+
+/* Sidebar Icon Block Styling */
+.icon--block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10%;
+}
+
+/* Active Icon Block Styling */
+.icon--block--active {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10%;
+  background-color: #ff2e00;
+  color: #f5f5f5;
+}
+
+.icon--block h3 {
+  color: #f5f5f5;
+  letter-spacing: 0.1rem;
+  font-weight: 350;
+}
+
+.icon--block:hover {
+  transition: all ease 0.5s;
+  background-color: #ff2e00;
+  cursor: pointer;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  /* Hide sidebar by default on mobile */
+  .sideNav {
+    transform: translateX(-100%); /* Hidden by default */
+    z-index: 1;
+  }
+  .sideNav.open {
+    transform: translateX(0); /* Visible when open */
+    z-index: 5; /* Enough to appear above main content, but below menu button */
+  }
+}

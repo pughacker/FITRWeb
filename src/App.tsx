@@ -1,15 +1,57 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import LoginPage from "./pages/auth/login/LoginPage";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
-
+import Dashboard from "./pages/Dashboard";
+import { useEffect } from "react";
+import {
+  useGetAccessWebTokenQuery,
+  useGetAuthTokenQuery,
+} from "./reducers/login";
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import ForgotPasswordConfirmationPage from "./pages/auth/ForgotPasswordConfirmationPage";
+import ChangePasswordPage from "./pages/auth/ChangePasswordPage";
+import LandingPage from "./pages/promotional/LandingPage";
 function App() {
-  const [count, setCount] = useState(0);
+  const { data, status, error } = useGetAuthTokenQuery();
 
-  console.log(count);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!data?.isAuthenticated) {
+      navigate("/login", { replace: true });
+    }
+    if (!error?.data?.isAuthenticated) {
+      navigate("/login", { replace: true });
+    }
+    if (data?.isAuthenticated) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [data?.isAuthenticated, status]);
+
+  useEffect(() => {
+    if (!data?.isAuthenticated && location.pathname.includes("/dashboard")) {
+      navigate("/login", { replace: true });
+    }
+  }, [data?.isAuthenticated, location.pathname]);
+
+  if (data?.isAuthenticated) {
+    return <Dashboard />;
+  }
   return (
-    <>
-      <div>
+    <div>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/landing_page" element={<LandingPage />} />
+        <Route path="/reset_password" element={<ForgotPasswordPage />} />
+        <Route
+          path="/change_password_confirmation"
+          element={<ForgotPasswordConfirmationPage />}
+        />
+        <Route path="/change_password" element={<ChangePasswordPage />} />
+      </Routes>
+
+      {/* <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -19,21 +61,15 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <button onClick={() => dispatch(increment())}>count is {value}</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
-      <h1>HAHHA GENESIS</h1>
-      <h1>HAHHA kenma</h1>
-      <h1>HAHHA bry</h1>
-      <h1>HAHHA vench</h1>
-    </>
+  </p>*/}
+    </div>
   );
 }
 
